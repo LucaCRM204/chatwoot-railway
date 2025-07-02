@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 set -e
 
 # Usa el puerto que define Railway, o 3000 si no está definido
