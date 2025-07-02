@@ -1,8 +1,15 @@
-#!/bin/sh
-set -e
+#!/usr/bin/env bash
+set -ex
 
-# Usa el puerto que define Railway, o 3000 si no está definido
-PORT=${PORT:-3000}
+echo "==> Instalando dependencias..."
+pnpm install
 
-echo "==> Iniciando servidor en el puerto $PORT..."
-bundle exec rails s -p $PORT -b 0.0.0.0
+echo "==> Saltando build, usando archivos ya compilados"
+# Prepara estructura básica
+bundle exec rake db:prepare
+
+echo "==> Configurando base de datos (db:setup)..."
+# Este comando crea la base de datos y corre las migraciones + seeds
+bundle exec rake db:setup
+
+echo "==> ✅ Deploy completo sin compilar"
